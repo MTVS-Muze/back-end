@@ -1,4 +1,4 @@
-package com.muze.configration;
+package com.muze.global.configration;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Configuration;
 import javax.sql.DataSource;
 
 @Configuration
-@MapperScan(value = "com.septeam.metatraining", sqlSessionFactoryRef = "SqlSessionFactory", annotationClass = Mapper.class)
+@MapperScan(value = "com.muze", sqlSessionFactoryRef = "SqlSessionFactory", annotationClass = Mapper.class)
 public class DatabaseConfiguration {
 
     @Value("${spring.datasource.mapper-locations}")

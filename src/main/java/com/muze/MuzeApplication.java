@@ -1,6 +1,6 @@
 package com.muze;
 
-import com.muze.configration.AppProperties;
+import com.muze.global.configration.AppProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
