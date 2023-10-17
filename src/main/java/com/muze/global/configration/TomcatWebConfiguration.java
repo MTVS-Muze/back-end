@@ -1,4 +1,4 @@
-package com.muze.configration;
+package com.muze.global.configration;
 
 import org.springframework.boot.web.embedded.tomcat.TomcatConnectorCustomizer;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;

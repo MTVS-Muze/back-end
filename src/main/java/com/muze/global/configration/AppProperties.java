@@ -1,4 +1,4 @@
-package com.muze.configration;
+package com.muze.global.configration;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

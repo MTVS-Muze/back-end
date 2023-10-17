@@ -1,4 +1,4 @@
-package com.muze.configration;
+package com.muze.global.configration;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
