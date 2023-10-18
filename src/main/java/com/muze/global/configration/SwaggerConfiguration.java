@@ -17,7 +17,7 @@ import org.springframework.context.annotation.Configuration;
 public class SwaggerConfiguration {
     @Bean
     public GroupedOpenApi like(){
-        String[] paths = {"/v1/like"};
+        String[] paths = {"/like"};
 
         return GroupedOpenApi
                 .builder()
