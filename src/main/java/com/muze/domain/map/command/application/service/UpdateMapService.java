@@ -25,7 +25,12 @@ public class UpdateMapService {
         Optional<Map> beforeMap = mapRepository.findById(updateMapDTO.getId());
         if(beforeMap.isPresent()){
             Map afterMap = beforeMap.get();
-
+            if(!updateMapDTO.getTitle().isEmpty()){
+                afterMap.setTitle(updateMapDTO.getTitle());
+            }
+            if(!updateMapDTO.getSong().isEmpty()){
+                afterMap.setSong(updateMapDTO.getSong());
+            }
             if(!updateMapDTO.getData().isEmpty()){
                 afterMap.setData(updateMapDTO.getData());
             }

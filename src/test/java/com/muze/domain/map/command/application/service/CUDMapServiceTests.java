@@ -17,7 +17,7 @@ import java.util.stream.Stream;
 
 @SpringBootTest
 @Transactional
-public class CRUMapServiceTests {
+public class CUDMapServiceTests {
 
     @Autowired
     private CreateMapService createMapService;
@@ -35,6 +35,8 @@ public class CRUMapServiceTests {
                 Arguments.of(
                         new RequestMapDTO(
                                 1L,
+                                "test용 제목",
+                                "test용 음악이름",
                                 "map.csv 파일 data"
                         )
                 )
@@ -56,20 +58,27 @@ public class CRUMapServiceTests {
     void updateMapTest(RequestMapDTO createMapDTO){
         // given
         MemberVO memberId = MemberVO.builder().memeberId(createMapDTO.getMemberId()).build();
-        Map createMap = mapRepository.save(new Map(memberId, createMapDTO.getData()));
+        Map createMap = mapRepository.save(new Map(memberId, createMapDTO.getTitle(), createMapDTO.getSong(), createMapDTO.getData()));
+
+        String beforeTitle = createMap.getTitle();
+        String afterTitle = "수정된 제목";
+
+        String beforeSong = createMap.getSong();
+        String afterSong = "수정된 노래";
 
         String beforeData = createMap.getData();
         String afterData = "수정된 Map.csv data";
-        System.out.println("before update = " + createMap.getData());
 
-        RequestMapDTO updateMap = new RequestMapDTO(createMap.getId(), createMap.getMemberId().getId(), afterData);
+        RequestMapDTO updateMap = new RequestMapDTO(createMap.getId(), afterTitle, afterSong, createMap.getMemberId().getId(), afterData);
         //when
         boolean result = updateMapService.updateMap(updateMap);
 
-        System.out.println("after update = " + createMap.getData());
         //then
         Assertions.assertTrue(result);
+        Assertions.assertNotEquals(beforeTitle, createMap.getTitle());
+        Assertions.assertNotEquals(beforeSong, createMap.getSong());
         Assertions.assertNotEquals(beforeData, createMap.getData());
+
     }
 
     @DisplayName("Id로 Map이 삭제되는지 확인")
@@ -78,8 +87,9 @@ public class CRUMapServiceTests {
     void deleteMapTest(RequestMapDTO createMapDTO){
         // given
         MemberVO memberId = MemberVO.builder().memeberId(createMapDTO.getMemberId()).build();
-        Map createMap = mapRepository.save(new Map(memberId, createMapDTO.getData()));
-        RequestMapDTO deleteMapDTO = new RequestMapDTO(createMap.getId(), createMap.getMemberId().getId(), createMap.getData());
+        Map createMap = mapRepository.save(new Map(memberId, createMapDTO.getTitle(), createMapDTO.getSong(), createMapDTO.getData()));
+        RequestMapDTO deleteMapDTO = new RequestMapDTO(createMap.getId(), createMap.getTitle(),
+                createMapDTO.getSong(), createMap.getMemberId().getId(), createMap.getData());
 
         int deleteBeforeCount =(int) mapRepository.count();
 
