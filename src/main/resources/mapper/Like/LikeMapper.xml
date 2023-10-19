@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.muze.domain.like.query.domain.repository.LikeMapper">
+
+    <select id="isLiked" parameterType="HashMap" resultType="boolean" >
+        SELECT  IF(COUNT(*) = 1, 1, 0)
+        FROM
+            LIKE_TB
+        WHERE
+            member_id = #{memberId} AND origin=#{origin} AND  origin_id = #{originId}
+    </select>
+
+    <select id="getCount" parameterType="HashMap" resultType="int" >
+        SELECT  COUNT(*)
+        FROM
+            LIKE_TB
+        WHERE
+            origin=#{origin} AND  origin_id = #{originId}
+    </select>
+
+</mapper>

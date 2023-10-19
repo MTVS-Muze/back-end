@@ -1,4 +1,4 @@
-package com.muze.like;
+package com.muze.like.service;
 
 import com.muze.domain.like.command.application.dto.LikeDTO;
 import com.muze.domain.like.command.application.service.CancelLikeService;
@@ -53,7 +53,7 @@ public class LikeServiceTests {
     @MethodSource("enrollLike")
     public void  cancelLikeTest(LikeDTO likeDTO){
         Long id = enrollLikeService.enrollLike(likeDTO);
-        cancelLikeService.CancelLike(id);
+        cancelLikeService.CancelLike(likeDTO);
         Assertions.assertFalse(likeRepository.findById(id).isPresent(),"정상적으로 삭제되지 않음");
     }
 }
