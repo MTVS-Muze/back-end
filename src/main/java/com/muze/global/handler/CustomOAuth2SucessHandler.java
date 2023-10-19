@@ -1,10 +1,10 @@
 package com.muze.global.handler;
 
-import com.muze.domain.security.command.application.service.IssueTokenService;
-import com.muze.domain.security.command.domain.aggregate.util.CookieUtils;
-import com.muze.domain.security.command.domain.exception.BadRequestException;
-import com.muze.domain.security.command.domain.repository.HttpCookieOAuth2AuthorizationRequestRepository;
-import com.muze.domain.security.principal.UserPrincipal;
+import com.muze.global.security.command.application.service.IssueTokenService;
+import com.muze.global.security.command.domain.aggregate.util.CookieUtils;
+import com.muze.global.security.command.domain.exception.BadRequestException;
+import com.muze.global.security.command.domain.repository.HttpCookieOAuth2AuthorizationRequestRepository;
+import com.muze.global.security.principal.UserPrincipal;
 import com.muze.global.configration.AppProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -20,7 +20,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.Optional;
 
-import static com.muze.domain.security.command.domain.repository.HttpCookieOAuth2AuthorizationRequestRepository.REDIRECT_URI_PARAM_COOKIE_NAME;
+import static com.muze.global.security.command.domain.repository.HttpCookieOAuth2AuthorizationRequestRepository.REDIRECT_URI_PARAM_COOKIE_NAME;
 
 @Component
 public class CustomOAuth2SucessHandler extends SimpleUrlAuthenticationSuccessHandler {
