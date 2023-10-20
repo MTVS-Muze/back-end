@@ -22,7 +22,6 @@ public class CreateMapService {
         MemberVO memberId = MemberVO.builder().memeberId(createMapDTO.getMemberId()).build();
 
         Map newMap = mapRepository.save(new Map(memberId,createMapDTO.getTitle(), createMapDTO.getSong(),createMapDTO.getData()));
-
         ResponseMapDTO map = new ResponseMapDTO(
                 newMap.getId(),
                 newMap.getMemberId().getId(),
