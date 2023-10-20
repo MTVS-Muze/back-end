@@ -22,12 +22,8 @@ public class EnrollLikeService {
     }
 
     public Long enrollLike(LikeDTO likeDTO){
-        System.out.println("하이");
         Like enrollLike = likeService.toLikeEntity(likeDTO);
-        System.out.println(enrollLike);
-
         Like like = likeRepository.save(enrollLike);
-        System.out.println(like);
         return like.getId();
     }
 }
