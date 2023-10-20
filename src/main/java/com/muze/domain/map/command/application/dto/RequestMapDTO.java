@@ -9,20 +9,16 @@ import lombok.Getter;
 @Schema(description = "Map 요청 객체")
 public class RequestMapDTO {
     private Long id;
+    private String title;
+    private String song;
     private Long memberId;
     private String data;
 
-    public RequestMapDTO(Long memberId, String data) {
-        this.memberId = memberId;
-        this.data = data;
-    }
 
-    @Override
-    public String toString() {
-        return "RequestMapDTO{" +
-                "id=" + id +
-                ", memberId=" + memberId +
-                ", data='" + data + '\'' +
-                '}';
+    public RequestMapDTO(Long memberId, String title, String song, String data) {
+        this.memberId = memberId;
+        this.title = title;
+        this.song = song;
+        this.data = data;
     }
 }

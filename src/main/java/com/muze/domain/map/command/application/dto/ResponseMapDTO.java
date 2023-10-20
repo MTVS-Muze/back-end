@@ -11,11 +11,18 @@ public class ResponseMapDTO {
 
     private Long memberId;
 
+    private String title;
+
+    private String song;
+
     private String data;
 
-    public ResponseMapDTO(Long id, Long memberId, String data) {
+
+    public ResponseMapDTO(Long id, Long memberId, String title, String song, String data) {
         this.id = id;
         this.memberId = memberId;
+        this.title = title;
+        this.song = song;
         this.data = data;
     }
 }

@@ -19,15 +19,31 @@ public class Map {
     @Embedded
     private MemberVO memberId;
 
+    @Column
+    private String title;
+
+    @Column
+    private String song;
+
     @Column(columnDefinition = "LONGTEXT")
     private String data;
 
-    public Map(MemberVO memberId, String data) {
+    public Map(MemberVO memberId, String title, String song, String data) {
         this.memberId = memberId;
+        this.title = title;
+        this.song = song;
         this.data = data;
     }
 
     public void setData(String data) {
         this.data = data;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setSong(String song) {
+        this.song = song;
     }
 }
