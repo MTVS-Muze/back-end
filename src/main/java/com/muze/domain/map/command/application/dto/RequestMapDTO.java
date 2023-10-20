@@ -21,4 +21,9 @@ public class RequestMapDTO {
         this.song = song;
         this.data = data;
     }
+
+    public RequestMapDTO(Long id) {
+        this.id = id;
+    }
+
 }
