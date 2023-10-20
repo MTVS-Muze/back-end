@@ -1,10 +1,10 @@
 package com.muze.domain.map.command.domain.aggregate.entity;
-
 import com.muze.domain.map.command.domain.aggregate.vo.MemberVO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+
 
 @Getter
 @Entity(name = "Map")
@@ -45,5 +45,17 @@ public class Map {
 
     public void setSong(String song) {
         this.song = song;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Map{" +
+                "id=" + id +
+                ", memberId=" + memberId +
+                ", title='" + title + '\'' +
+                ", song='" + song + '\'' +
+                ", data='" + data + '\'' +
+                '}';
     }
 }
