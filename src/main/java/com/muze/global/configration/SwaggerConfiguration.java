@@ -17,11 +17,22 @@ import org.springframework.context.annotation.Configuration;
 public class SwaggerConfiguration {
     @Bean
     public GroupedOpenApi like(){
-        String[] paths = {"/like"};
+        String[] paths = {"/like/**"};
 
         return GroupedOpenApi
                 .builder()
                 .group("Muze Swagger v1-like")
+                .pathsToMatch(paths)
+                .build();
+    }
+
+    @Bean
+    public GroupedOpenApi map(){
+        String[] paths ={"/map/**"};
+
+        return GroupedOpenApi
+                .builder()
+                .group("Muze Sawgger v1-map")
                 .pathsToMatch(paths)
                 .build();
     }
