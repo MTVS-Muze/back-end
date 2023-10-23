@@ -2,8 +2,10 @@ package com.muze.domain.map.command.domain.aggregate.entity;
 import com.muze.domain.map.command.domain.aggregate.vo.MemberVO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 
 @Getter
@@ -28,11 +30,17 @@ public class Map {
     @Column(columnDefinition = "LONGTEXT")
     private String data;
 
+    @CreatedDate
+    @Column(name = "created_date")
+    private LocalDateTime createdDate;
+
     public Map(MemberVO memberId, String title, String song, String data) {
         this.memberId = memberId;
         this.title = title;
         this.song = song;
         this.data = data;
+        this.createdDate=LocalDateTime.now();
+
     }
 
     public void setData(String data) {
