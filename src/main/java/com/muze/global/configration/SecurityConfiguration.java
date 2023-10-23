@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -33,10 +34,39 @@ public class SecurityConfiguration {
     public HttpCookieOAuth2AuthorizationRequestRepository httpCookieOAuth2AuthorizationRequestRepository(){
         return new HttpCookieOAuth2AuthorizationRequestRepository();
     }
+    @Bean
+    @Order(0)
+    public SecurityFilterChain exceptionSecurityFilterChain(HttpSecurity http) throws Exception {
+        http
+                .cors()
+                .and()
+                .csrf().disable()
+                .requestCache().disable()
+                .securityContext().disable()
+                .sessionManagement().disable()
+                .requestMatchers((matchers) ->
+                        matchers
+                                .antMatchers(
+                                        "/", "/error","/favicon.ico", "/**/*.png",
+                                        "/**/*.gif", "/**/*.svg", "/**/*.jpg",
+                                        "/**/*.html", "/**/*.css", "/**/*.js"
+                                )
+                                .antMatchers(
+                                        "/swagger", "/swagger-ui.html", "/swagger-ui/**",
+                                        "/api-docs", "/api-docs/**", "/v3/api-docs/**"
+                                )
+                                .antMatchers(
+                                        "/login/**","/auth/**","/map/**", "/like/**"
+                                )
+                )
+                .authorizeHttpRequests((authorize) -> authorize.anyRequest().permitAll());
 
+        return http.build();
+    }
 
 
     @Bean
+    @Order(1)
     public SecurityFilterChain filterChain (HttpSecurity http) throws Exception{
         http
                 .httpBasic().disable()
