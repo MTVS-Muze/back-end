@@ -2,6 +2,8 @@ package com.muze.domain.map.query.application.dto;
 
 import lombok.Getter;
 
+import java.time.LocalDateTime;
+
 @Getter
 public class FindMapDTO {
 
@@ -14,6 +16,8 @@ public class FindMapDTO {
     private String song;
 
     private String data;
+
+    private LocalDateTime createdDate;
 
     @Override
     public String toString() {

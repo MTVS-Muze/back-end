@@ -27,7 +27,8 @@ public class CreateMapService {
                 newMap.getMemberId().getId(),
                 newMap.getTitle(),
                 newMap.getSong(),
-                newMap.getData()
+                newMap.getData(),
+                newMap.getCreatedDate()
         );
 
         return map;

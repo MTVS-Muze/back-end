@@ -8,6 +8,7 @@
         <result property="title" column="title"/>
         <result property="song" column="song"/>
         <result property="data" column="data"/>
+        <result property="created_date" column="createDate"/>
     </resultMap>
 
     <select id="findAll" resultMap="FindMap">
