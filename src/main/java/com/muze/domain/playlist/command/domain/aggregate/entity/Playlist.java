@@ -21,8 +21,8 @@ public class Playlist {
 
     @Column
     private String title;
-    public Playlist(MemberVO memberId, String title) {
-        this.memberId = memberId;
+    public Playlist(Long memberId, String title) {
+        this.memberId = new MemberVO(memberId);
         this.title = title;
     }
 }

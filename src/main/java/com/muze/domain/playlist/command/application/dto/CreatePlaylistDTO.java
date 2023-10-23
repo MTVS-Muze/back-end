@@ -1,10 +1,7 @@
-package com.muze.domain.like.command.application.dto;
-
-import com.muze.domain.like.command.domain.aggregate.originenum.Origin;
+package com.muze.domain.playlist.command.application.dto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
@@ -12,20 +9,16 @@ import javax.validation.constraints.Positive;
 @Getter
 @NoArgsConstructor
 @ToString
-public class LikeDTO {
+public class CreatePlaylistDTO {
     @NotNull
     @Positive
     private Long memberId;
+
     @NotBlank
-    private Origin origin;
-    @NotNull
-    @Positive
-    private Long originId;
-    public LikeDTO(Long memberId, Origin origin, Long originId) {
+    private String title;
+
+    public CreatePlaylistDTO(Long memberId, String title) {
         this.memberId = memberId;
-        this.origin = origin;
-        this.originId = originId;
+        this.title = title;
     }
 }
-
-
