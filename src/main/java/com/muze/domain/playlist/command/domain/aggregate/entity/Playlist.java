@@ -24,11 +24,13 @@ public class Playlist {
     @Column
     private String title;
 
+
     @Column(name = "created_date")
     @CreatedDate
     private LocalDateTime createdDate;
-    public Playlist(MemberVO memberId, String title) {
-        this.memberId = memberId;
+  
+    public Playlist(Long memberId, String title) {
+        this.memberId = new MemberVO(memberId);
         this.title = title;
         this.createdDate = LocalDateTime.now();
     }

@@ -23,4 +23,8 @@ public class MapInPlaylist {
     @Embedded
     private PlaylistVO playlistId;
 
+    public MapInPlaylist(Long mapId, Long playlistId) {
+        this.mapId = new MapVO(mapId);
+        this.playlistId = new PlaylistVO(playlistId);
+    }
 }
