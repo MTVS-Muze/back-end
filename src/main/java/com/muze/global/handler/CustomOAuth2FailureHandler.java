@@ -1,7 +1,7 @@
 package com.muze.global.handler;
 
-import com.muze.domain.security.command.domain.aggregate.util.CookieUtils;
-import com.muze.domain.security.command.domain.repository.HttpCookieOAuth2AuthorizationRequestRepository;
+import com.muze.global.security.command.domain.aggregate.util.CookieUtils;
+import com.muze.global.security.command.domain.repository.HttpCookieOAuth2AuthorizationRequestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static com.muze.domain.security.command.domain.repository.HttpCookieOAuth2AuthorizationRequestRepository.REDIRECT_URI_PARAM_COOKIE_NAME;
+import static com.muze.global.security.command.domain.repository.HttpCookieOAuth2AuthorizationRequestRepository.REDIRECT_URI_PARAM_COOKIE_NAME;
 
 @Component
 public class CustomOAuth2FailureHandler extends SimpleUrlAuthenticationFailureHandler {

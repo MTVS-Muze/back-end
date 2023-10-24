@@ -1,14 +1,16 @@
 package com.muze.global.configration;
 
 import com.muze.domain.member.command.domain.aggregate.entity.enumtype.Role;
-import com.muze.domain.security.command.application.service.CustomOAuth2UserService;
-import com.muze.domain.security.command.domain.repository.HttpCookieOAuth2AuthorizationRequestRepository;
+import com.muze.global.security.command.application.service.CustomOAuth2UserService;
+import com.muze.global.security.command.domain.repository.HttpCookieOAuth2AuthorizationRequestRepository;
+import com.muze.global.handler.CustomAccessDeniedHandler;
 import com.muze.global.handler.CustomOAuth2FailureHandler;
 import com.muze.global.handler.CustomOAuth2SucessHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -22,15 +24,49 @@ public class SecurityConfiguration {
     private final CustomOAuth2UserService customOAuth2UserService;
     private final CustomOAuth2SucessHandler customOAuth2SucessHandler;
     private final CustomOAuth2FailureHandler customOAuth2FailureHandler;
-//    @Autowired
-//    @Qualifier("RestAuthenticationEntryPoint")
-//    private AuthenticationEntryPoint authEntryPoint;
+
+    private final CustomAccessDeniedHandler customAccessDeniedHandler;
+
+    @Autowired
+    @Qualifier("RestAuthenticationEntryPoint")
+    private AuthenticationEntryPoint authEntryPoint;
 
     public HttpCookieOAuth2AuthorizationRequestRepository httpCookieOAuth2AuthorizationRequestRepository(){
         return new HttpCookieOAuth2AuthorizationRequestRepository();
     }
+    @Bean
+    @Order(0)
+    public SecurityFilterChain exceptionSecurityFilterChain(HttpSecurity http) throws Exception {
+        http
+                .cors()
+                .and()
+                .csrf().disable()
+                .requestCache().disable()
+                .securityContext().disable()
+                .sessionManagement().disable()
+                .requestMatchers((matchers) ->
+                        matchers
+                                .antMatchers(
+                                        "/", "/error","/favicon.ico", "/**/*.png",
+                                        "/**/*.gif", "/**/*.svg", "/**/*.jpg",
+                                        "/**/*.html", "/**/*.css", "/**/*.js"
+                                )
+                                .antMatchers(
+                                        "/swagger", "/swagger-ui.html", "/swagger-ui/**",
+                                        "/api-docs", "/api-docs/**", "/v3/api-docs/**"
+                                )
+                                .antMatchers(
+                                        "/login/**","/auth/**","/map/**", "/like/**"
+                                )
+                )
+                .authorizeHttpRequests((authorize) -> authorize.anyRequest().permitAll());
+
+        return http.build();
+    }
+
 
     @Bean
+    @Order(1)
     public SecurityFilterChain filterChain (HttpSecurity http) throws Exception{
         http
                 .httpBasic().disable()
@@ -43,7 +79,7 @@ public class SecurityConfiguration {
                 .formLogin()
                 .disable()
                 .exceptionHandling()
-//                .authenticationEntryPoint(authEntryPoint)
+                .authenticationEntryPoint(authEntryPoint)
 
                 .and()
 
@@ -69,7 +105,9 @@ public class SecurityConfiguration {
                 .successHandler(customOAuth2SucessHandler)
                 .failureHandler(customOAuth2FailureHandler);
 
-
+        http
+                .exceptionHandling()
+                .accessDeniedHandler(customAccessDeniedHandler);
         return http.build();
     }
 }
