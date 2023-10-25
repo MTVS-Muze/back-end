@@ -4,8 +4,10 @@ package com.muze.domain.mapinplaylist.command.application.contoller;
 import com.muze.domain.mapinplaylist.command.application.dto.AddPlaylistDTO;
 import com.muze.domain.mapinplaylist.command.application.service.AddPlaylistService;
 import com.muze.domain.mapinplaylist.command.application.service.RemovePlaylistService;
+import com.muze.global.security.principal.UserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/playlistinmap")
+@RequestMapping("/mapinplaylist")
 public class PlaylistInMapController {
 
     private final AddPlaylistService addPlaylistService;
@@ -28,7 +30,9 @@ public class PlaylistInMapController {
     }
 
     @PostMapping
-    public ResponseEntity<?> AddPlaylist(@RequestBody @Valid AddPlaylistDTO addPlaylistDTO){
+    public ResponseEntity<?> AddPlaylist(@RequestBody @Valid AddPlaylistDTO addPlaylistDTO
+//                                         , @AuthenticationPrincipal UserPrincipal userPrincipal
+                                         ){
         addPlaylistService.addPlaylist(addPlaylistDTO);
 
 
