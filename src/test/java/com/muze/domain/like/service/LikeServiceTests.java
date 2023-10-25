@@ -1,4 +1,4 @@
-package com.muze.like.service;
+package com.muze.domain.like.service;
 
 import com.muze.domain.like.command.application.dto.LikeDTO;
 import com.muze.domain.like.command.application.service.CancelLikeService;

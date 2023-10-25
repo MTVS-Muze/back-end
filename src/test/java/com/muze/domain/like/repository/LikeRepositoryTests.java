@@ -1,4 +1,4 @@
-package com.muze.like.repository;
+package com.muze.domain.like.repository;
 
 import com.muze.domain.like.command.application.dto.LikeDTO;
 import com.muze.domain.like.command.application.service.EnrollLikeService;

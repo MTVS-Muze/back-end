@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.muze.domain.mapinplaylist.query.domain.repository.MapInPlaylistMapper">
+    <resultMap id="MapInPlaylistMap" type="com.muze.domain.mapinplaylist.query.application.dto.MapInPlaylistInfoDTO">
+        <id property="id" column="id"/>
+        <result property="playlistId" column="playlist_id"/>
+        <result property="mapId" column="map_id"/>
+    </resultMap>
+
+    <select id="findMapByPlaylistId"  resultMap="MapInPlaylistMap" >
+        SELECT *
+        FROM
+            MAPINPLAYLIST_TB
+        WHERE PLAYLIST_ID = #{playlist_id}
+    </select>
+
+
+</mapper>

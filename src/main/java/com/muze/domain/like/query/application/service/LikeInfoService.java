@@ -3,12 +3,14 @@ package com.muze.domain.like.query.application.service;
 import com.muze.domain.like.command.application.dto.LikeDTO;
 import com.muze.domain.like.command.domain.aggregate.entity.Like;
 import com.muze.domain.like.query.domain.repository.LikeMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class LikeInfoService {
     private final LikeMapper likeMapper;
 
+    @Autowired
     public LikeInfoService(LikeMapper likeMapper) {
         this.likeMapper = likeMapper;
     }
