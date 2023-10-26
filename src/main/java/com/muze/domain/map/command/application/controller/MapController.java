@@ -37,20 +37,21 @@ public class MapController {
     }
 
 
+//    @Operation(summary = "Map 등록", description = "사용자가 만든 Map 저장")
+//    @PostMapping("/create")
+//    public ResponseEntity<ResponseMapDTO> createMap(@RequestPart(value = "dto") RequestMapDTO createDTO
+//                                                    ,@RequestPart(value = "file") MultipartFile file
+//    ){
+//        ResponseMapDTO map = createMapService.createMap(createDTO,file);
+//        return new ResponseEntity<>(map, HttpStatus.CREATED);
+//    }
+
     @Operation(summary = "Map 등록", description = "사용자가 만든 Map 저장")
     @PostMapping("/create")
-    public ResponseEntity<ResponseMapDTO> createMap(@RequestPart(value = "dto") RequestMapDTO createDTO
-                                                    ,@RequestPart(value = "file") MultipartFile file
-    ){
-        ResponseMapDTO map = createMapService.createMap(createDTO,file);
+    public ResponseEntity<ResponseMapDTO> createMap(@RequestBody RequestMapDTO createDTO){
+        ResponseMapDTO map = createMapService.createMap(createDTO);
         return new ResponseEntity<>(map, HttpStatus.CREATED);
     }
 
-//    @Operation(summary = "Map 등록", description = "사용자가 만든 Map 저장")
-//    @PostMapping("/create")
-//    public ResponseEntity<ResponseMapDTO> createMap(@RequestBody RequestMapDTO createDTO){
-//        ResponseMapDTO map = createMapService.createMap(createDTO);
-//        return new ResponseEntity<>(map, HttpStatus.CREATED);
-//    }
 
 }

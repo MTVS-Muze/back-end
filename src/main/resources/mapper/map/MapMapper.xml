@@ -17,5 +17,11 @@
             MAP_TB
     </select>
 
+    <select id="findById" resultMap="FindMap">
+        SELECT *
+        FROM
+            MAP_TB
+          WHERE id=#{id}
+    </select>
 
 </mapper>
