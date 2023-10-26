@@ -1,10 +1,12 @@
 package com.muze.domain.map.query.application.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
 
 @Getter
+@AllArgsConstructor
 public class FindMapDTO {
 
     private Long id;
@@ -18,6 +20,8 @@ public class FindMapDTO {
     private String data;
 
     private LocalDateTime createdDate;
+
+
 
     @Override
     public String toString() {

@@ -9,4 +9,6 @@ import java.util.List;
 public interface MapMapper {
 
     List<FindMapDTO> findAll();
+
+    FindMapDTO findById(Long id);
 }
