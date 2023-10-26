@@ -6,8 +6,8 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public enum Origin {
-    MAP("ORIGIN_MAP","Map"),
-    PLAYLIST("ORIGIN_PLAYLIST","Playlist");
+    MAP("MAP","Map"),
+    PLAYLIST("PLAYLIST","Playlist");
 
     private final String key;
     private final String title;

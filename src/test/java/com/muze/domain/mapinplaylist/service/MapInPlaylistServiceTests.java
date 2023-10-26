@@ -1,4 +1,4 @@
-package com.muze.mapinplaylist.service;
+package com.muze.domain.mapinplaylist.service;
 
 import com.muze.domain.mapinplaylist.command.application.dto.AddPlaylistDTO;
 import com.muze.domain.mapinplaylist.command.application.service.AddPlaylistService;

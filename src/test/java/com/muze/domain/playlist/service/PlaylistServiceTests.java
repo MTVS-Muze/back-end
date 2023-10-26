@@ -1,4 +1,4 @@
-package com.muze.playlist.service;
+package com.muze.domain.playlist.service;
 import com.muze.domain.playlist.command.application.dto.CreatePlaylistDTO;
 import com.muze.domain.playlist.command.application.service.CreatePlaylistService;
 import com.muze.domain.playlist.command.application.service.DeletePlaylistService;
