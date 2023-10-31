@@ -30,7 +30,8 @@ public class CUDMapServiceTests {
 
     @Autowired
     private MapRepository mapRepository;
-    private static Stream<Arguments> mapInfo(){
+
+    private static Stream<Arguments> mapInfo() {
         return Stream.of(
                 Arguments.of(
                         new RequestMapDTO(
@@ -46,16 +47,16 @@ public class CUDMapServiceTests {
     @DisplayName("RequestDTO로 Map이 데이터가 생성되는지 확인")
     @ParameterizedTest
     @MethodSource("mapInfo")
-    void createMapTest(RequestMapDTO createMapDTO){
+    void createMapTest(RequestMapDTO createMapDTO) {
         Assertions.assertDoesNotThrow(
-                ()->createMapService.createMap(createMapDTO)
+                () -> createMapService.createMap(createMapDTO)
         );
     }
 
     @DisplayName("RequestDTO로 Map data가 수정되는지 확인")
     @ParameterizedTest
     @MethodSource("mapInfo")
-    void updateMapTest(RequestMapDTO createMapDTO){
+    void updateMapTest(RequestMapDTO createMapDTO) {
         // given
         MemberVO memberId = MemberVO.builder().memeberId(createMapDTO.getMemberId()).build();
         Map createMap = mapRepository.save(new Map(memberId, createMapDTO.getTitle(), createMapDTO.getSong(), createMapDTO.getData()));
@@ -69,7 +70,7 @@ public class CUDMapServiceTests {
         String beforeData = createMap.getData();
         String afterData = "수정된 Map.csv data";
 
-        RequestMapDTO updateMap = new RequestMapDTO(createMap.getId(), afterTitle, afterSong, createMap.getMemberId().getId(), afterData);
+        RequestMapDTO updateMap = new RequestMapDTO(createMap.getId(), createMap.getMemberId().getId(), afterSong, afterTitle, afterData);
         //when
         boolean result = updateMapService.updateMap(updateMap);
 
@@ -84,18 +85,18 @@ public class CUDMapServiceTests {
     @DisplayName("Id로 Map이 삭제되는지 확인")
     @ParameterizedTest
     @MethodSource("mapInfo")
-    void deleteMapTest(RequestMapDTO createMapDTO){
+    void deleteMapTest(RequestMapDTO createMapDTO) {
         // given
         MemberVO memberId = MemberVO.builder().memeberId(createMapDTO.getMemberId()).build();
         Map createMap = mapRepository.save(new Map(memberId, createMapDTO.getTitle(), createMapDTO.getSong(), createMapDTO.getData()));
-        RequestMapDTO deleteMapDTO = new RequestMapDTO(createMap.getId(), createMap.getTitle(),
-                createMapDTO.getSong(), createMap.getMemberId().getId(), createMap.getData());
+        RequestMapDTO deleteMapDTO = new RequestMapDTO(createMap.getId(), createMap.getMemberId().getId(),
+                createMapDTO.getSong(), createMap.getTitle(), createMap.getData());
 
-        int deleteBeforeCount =(int) mapRepository.count();
+        int deleteBeforeCount = (int) mapRepository.count();
 
         //when
         deleteMapService.deleteMap(deleteMapDTO);
         //then
-        Assertions.assertEquals(mapRepository.count(), deleteBeforeCount-1);
+        Assertions.assertEquals(mapRepository.count(), deleteBeforeCount - 1);
     }
 }
