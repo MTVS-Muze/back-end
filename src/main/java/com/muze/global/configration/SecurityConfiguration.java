@@ -1,11 +1,16 @@
 package com.muze.global.configration;
 
 import com.muze.domain.member.command.domain.aggregate.entity.enumtype.Role;
+import com.muze.global.filter.AuthenticationExceptionFilter;
+import com.muze.global.filter.NullPointExceptionFilter;
+import com.muze.global.filter.TokenAuthenticationFilter;
 import com.muze.global.security.command.application.service.CustomOAuth2UserService;
+import com.muze.global.security.command.application.service.CustomUserDetailService;
 import com.muze.global.security.command.domain.repository.HttpCookieOAuth2AuthorizationRequestRepository;
 import com.muze.global.handler.CustomAccessDeniedHandler;
 import com.muze.global.handler.CustomOAuth2FailureHandler;
 import com.muze.global.handler.CustomOAuth2SucessHandler;
+import com.muze.global.security.command.domain.service.CustomTokenService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -16,6 +21,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.servlet.HandlerExceptionResolver;
 
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -27,12 +34,31 @@ public class SecurityConfiguration {
 
     private final CustomAccessDeniedHandler customAccessDeniedHandler;
 
+    private final NullPointExceptionFilter nullPointExceptionFilter;
+
+    @Autowired
+    private CustomTokenService customTokenService;
+
+    @Autowired
+    private CustomUserDetailService customUserDetailService;
+
     @Autowired
     @Qualifier("RestAuthenticationEntryPoint")
     private AuthenticationEntryPoint authEntryPoint;
 
+    @Autowired
+    @Qualifier("handlerExceptionResolver")
+    private HandlerExceptionResolver resolver;
     public HttpCookieOAuth2AuthorizationRequestRepository httpCookieOAuth2AuthorizationRequestRepository(){
         return new HttpCookieOAuth2AuthorizationRequestRepository();
+    }
+
+    AuthenticationExceptionFilter authenticationExceptionFilter(HandlerExceptionResolver resolver) {
+        return new AuthenticationExceptionFilter(resolver);
+    }
+    TokenAuthenticationFilter tokenAuthenticationFilter(CustomTokenService customTokenService,
+                                                        CustomUserDetailService customUserDetailService){
+        return new TokenAuthenticationFilter(customTokenService,customUserDetailService);
     }
     @Bean
     @Order(0)
@@ -108,6 +134,12 @@ public class SecurityConfiguration {
         http
                 .exceptionHandling()
                 .accessDeniedHandler(customAccessDeniedHandler);
+
+        http
+                .addFilterBefore(tokenAuthenticationFilter(customTokenService,customUserDetailService), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(authenticationExceptionFilter(resolver), TokenAuthenticationFilter.class)
+                .addFilterBefore(nullPointExceptionFilter, AuthenticationExceptionFilter.class);
+
         return http.build();
     }
 }
