@@ -4,6 +4,7 @@ import com.muze.domain.friend.command.domain.aggregate.vo.FriendVO;
 import com.muze.domain.friend.command.domain.aggregate.vo.MemberVO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 
@@ -11,6 +12,7 @@ import javax.persistence.*;
 @Table(name = "FRIEND_TB")
 @Getter
 @NoArgsConstructor
+@ToString
 public class Friend {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,5 +23,10 @@ public class Friend {
     private MemberVO memberId;
     @Column
     @Embedded
-    private FriendVO friendVO;
+    private FriendVO friendId;
+
+    public Friend(Long memberId,Long friendId) {
+        this.memberId = new MemberVO(memberId);
+        this.friendId = new FriendVO(friendId);
+    }
 }
