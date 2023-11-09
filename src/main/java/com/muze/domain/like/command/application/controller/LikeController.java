@@ -7,13 +7,16 @@ import com.muze.domain.like.command.domain.repository.LikeRepository;
 import com.muze.domain.like.query.application.dto.LikeInfoDTO;
 import com.muze.domain.like.query.application.service.LikeInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/like")
@@ -31,9 +34,15 @@ public class LikeController {
     }
 
     @PostMapping
-    public ResponseEntity<LikeInfoDTO> enrollOrDeleteLike(@RequestBody @Valid LikeDTO likeDTO
+    public ResponseEntity<?> enrollOrDeleteLike(@Valid LikeDTO likeDTO, BindingResult bindingResult
 //                                             ,@AuthenticationPrincipal UserPrincipal userPrincipal
     ){
+        if(bindingResult.hasErrors()){
+            List<FieldError> list = bindingResult.getFieldErrors();
+            for(FieldError error : list) {
+                return new ResponseEntity<>(error.getDefaultMessage() , HttpStatus.BAD_REQUEST);
+            }
+        }
 
         if(likeInfoService.isLiked(likeDTO)){
             cancelLikeService.CancelLike(likeDTO);

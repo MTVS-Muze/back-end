@@ -83,6 +83,7 @@ public class SecurityConfiguration {
                                 )
                                 .antMatchers(
                                         "/login/**"
+
                                 )
                 )
                 .authorizeHttpRequests((authorize) -> authorize.anyRequest().permitAll());
