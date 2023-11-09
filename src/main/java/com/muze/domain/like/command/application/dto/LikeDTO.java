@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
@@ -13,13 +14,12 @@ import javax.validation.constraints.Positive;
 @NoArgsConstructor
 @ToString
 public class LikeDTO {
-    @NotNull
-    @Positive
+    @NotNull(message = "memberId는 Null일 수 없습니다.")
+    @Positive(message = "memberId는 음수일 수 없습니다.")
     private Long memberId;
-    @NotBlank
     private Origin origin;
-    @NotNull
-    @Positive
+    @NotNull(message = "originId는 Null일 수 없습니다.")
+    @Positive(message = "originId는 음수일 수 없습ㄴ디ㅏ.")
     private Long originId;
     public LikeDTO(Long memberId, Origin origin, Long originId) {
         this.memberId = memberId;

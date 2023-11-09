@@ -82,7 +82,7 @@ public class SecurityConfiguration {
                                         "/api-docs", "/api-docs/**", "/v3/api-docs/**"
                                 )
                                 .antMatchers(
-                                        "/login/**","/auth/**","/map/**", "/like/**"
+                                        "/login/**","/auth/**","/map/**", "/like/**", "/friend/**"
                                 )
                 )
                 .authorizeHttpRequests((authorize) -> authorize.anyRequest().permitAll());

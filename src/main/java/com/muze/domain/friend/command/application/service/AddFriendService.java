@@ -18,9 +18,14 @@ public class AddFriendService {
         this.friendService = friendService;
     }
 
-    public Long AddFriend(FriendDTO friendDTO){
+    public Long addFriend(FriendDTO friendDTO){
         Friend newFriend = friendService.toFriendEntity(friendDTO);
         Friend friend = friendRepository.save(newFriend);
         return friend.getId();
     }
+
+    public Boolean checkFriend(FriendDTO friendDTO){
+        return friendRepository.findByMemberId_IdAndFriendId_Id(friendDTO.getMemberId(),friendDTO.getFriendId()).isPresent();
+    }
+
 }
