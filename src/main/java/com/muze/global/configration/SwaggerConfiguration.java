@@ -25,7 +25,16 @@ public class SwaggerConfiguration {
                 .pathsToMatch(paths)
                 .build();
     }
+    @Bean
+    public GroupedOpenApi friend(){
+        String[] paths = {"/friend/**"};
 
+        return GroupedOpenApi
+                .builder()
+                .group("Muze Swagger v1-friend")
+                .pathsToMatch(paths)
+                .build();
+    }
     @Bean
     public GroupedOpenApi map(){
         String[] paths ={"/map/**"};

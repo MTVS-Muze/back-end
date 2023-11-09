@@ -42,7 +42,7 @@ public class FriendServiceTests {
     @ParameterizedTest
     @MethodSource("addFriend")
     public void addFriendTest(FriendDTO friendDTO){
-        Long id = addFriendService.AddFriend(friendDTO);
+        Long id = addFriendService.addFriend(friendDTO);
         Assertions.assertNotNull(friendRepository.findById(id));
     }
 
@@ -50,7 +50,7 @@ public class FriendServiceTests {
     @ParameterizedTest
     @MethodSource("addFriend")
     public void deleteFriend(FriendDTO friendDTO){
-        Long id = addFriendService.AddFriend(friendDTO);
+        Long id = addFriendService.addFriend(friendDTO);
         deleteFriendService.deleteFriend(friendDTO);
         Assertions.assertFalse(friendRepository.findById(id).isPresent());
     }
