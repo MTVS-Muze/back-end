@@ -45,4 +45,15 @@ public class SwaggerConfiguration {
                 .pathsToMatch(paths)
                 .build();
     }
+
+    @Bean
+    public GroupedOpenApi member(){
+        String[] paths ={"/member/**"};
+
+        return GroupedOpenApi
+                .builder()
+                .group("Muze Sawgger v1-member")
+                .pathsToMatch(paths)
+                .build();
+    }
 }
