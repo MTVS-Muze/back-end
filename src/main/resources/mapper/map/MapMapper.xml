@@ -7,6 +7,8 @@
         <result property="memberId" column="member_id"/>
         <result property="title" column="title"/>
         <result property="song" column="song"/>
+        <result property="singer" column="singer"/>
+        <result property="info" column="info"/>
         <result property="data" column="data"/>
         <result property="created_date" column="createDate"/>
     </resultMap>
