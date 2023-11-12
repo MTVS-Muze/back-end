@@ -17,6 +17,8 @@ public class RequestMapDTO {
     private Long memberId;
     private String title;
     private String song;
+    private String singer;
+    private String info;
     private String data;
 
 
@@ -37,6 +39,10 @@ public class RequestMapDTO {
         this.title = title;
         this.song = song;
         this.data = data;
+    }
+
+    public void setMemberId(Long memberId) {
+        this.memberId = memberId;
     }
 
     @Override

@@ -33,23 +33,16 @@ public class FindMapController {
     @GetMapping("/all")
     public ResponseEntity<List<FindMapDTO>> findAll(){
         List<FindMapDTO> maps =findMapService.findAll();
-
         return new ResponseEntity<>(maps, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> findById(@PathVariable Long id){
-        FindResponseDTO findMap = findMapService.findById(id);
-
-        return new ResponseEntity<>(findMap.getFile(),HttpStatus.OK);
+    public ResponseEntity<FindMapDTO> findById(@PathVariable Long id){
+        FindMapDTO findMap = findMapService.findById(id);
+        return new ResponseEntity<>(findMap,HttpStatus.OK);
     }
 
-    @GetMapping("/test/{id}")
-    public ResponseEntity<FindMapDTO> findByIdTest(@PathVariable Long id){
-        FindMapDTO findMap = findMapService.findByIdTest(id);
-        System.out.println("통과!!!~!~@~!");
-        return new ResponseEntity<>(findMap, HttpStatus.OK);
-    }
+
 
 //    @GetMapping("/test")
 //    public ResponseEntity<Resource> test() {

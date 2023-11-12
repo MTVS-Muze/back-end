@@ -17,15 +17,21 @@ public class ResponseMapDTO {
 
     private String song;
 
+    private String singer;
+
+    private String info;
+
     private String data;
 
     private LocalDateTime createdDate;
 
-    public ResponseMapDTO(Long id, Long memberId, String title, String song, String data, LocalDateTime createdDate) {
+    public ResponseMapDTO(Long id, Long memberId, String title, String song, String singer, String info, String data, LocalDateTime createdDate) {
         this.id = id;
         this.memberId = memberId;
         this.title = title;
         this.song = song;
+        this.singer = singer;
+        this.info = info;
         this.data = data;
         this.createdDate = createdDate;
     }

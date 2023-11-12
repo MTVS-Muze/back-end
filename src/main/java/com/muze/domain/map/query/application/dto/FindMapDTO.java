@@ -19,11 +19,18 @@ public class FindMapDTO {
 
     private String song;
 
+    private String singer;
+
+    private String info;
+
     private String data;
 
     private LocalDateTime createdDate;
 
 
+    public void setMemberId(String memberId) {
+        this.memberId = memberId;
+    }
 
     @Override
     public String toString() {

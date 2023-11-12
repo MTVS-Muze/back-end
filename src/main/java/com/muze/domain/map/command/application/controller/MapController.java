@@ -5,10 +5,13 @@ import com.muze.domain.map.command.application.dto.ResponseMapDTO;
 import com.muze.domain.map.command.application.service.CreateMapService;
 import com.muze.domain.map.command.application.service.DeleteMapService;
 import com.muze.domain.map.command.application.service.UpdateMapService;
+import com.muze.global.common.annotation.CurrentMember;
+import com.muze.global.security.principal.UserPrincipal;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -48,10 +51,11 @@ public class MapController {
 
     @Operation(summary = "Map 등록", description = "사용자가 만든 Map 저장")
     @PostMapping("/create")
-    public ResponseEntity<ResponseMapDTO> createMap(@RequestBody RequestMapDTO createDTO){
+    public ResponseEntity<ResponseMapDTO> createMap(@RequestBody RequestMapDTO createDTO
+                                                    ,@AuthenticationPrincipal UserPrincipal userPrincipal){
+        Long memberId = userPrincipal.getId();
+        createDTO.setMemberId(memberId);
         ResponseMapDTO map = createMapService.createMap(createDTO);
         return new ResponseEntity<>(map, HttpStatus.CREATED);
     }
-
-
 }
