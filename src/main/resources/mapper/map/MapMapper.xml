@@ -4,7 +4,7 @@
 <mapper namespace="com.muze.domain.map.query.domain.repository.MapMapper">
     <resultMap id="FindMap" type="com.muze.domain.map.query.application.dto.FindMapDTO">
         <id property="id" column="id" />
-        <result property="memberId" column="member_id"/>
+        <result property="memberName" column="member_id"/>
         <result property="title" column="title"/>
         <result property="song" column="song"/>
         <result property="singer" column="singer"/>
@@ -25,5 +25,13 @@
             MAP_TB
           WHERE id=#{id}
     </select>
+
+    <select id="findByMemberId" resultMap="FindMap">
+        SELECT *
+        FROM
+            MAP_TB
+        WHERE member_id=#{memberId}
+    </select>
+
 
 </mapper>

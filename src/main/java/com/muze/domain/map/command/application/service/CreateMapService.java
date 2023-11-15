@@ -1,6 +1,6 @@
 package com.muze.domain.map.command.application.service;
 
-import com.muze.domain.map.command.application.dto.RequestMapDTO;
+import com.muze.domain.map.command.application.dto.CreateMapDTO;
 import com.muze.domain.map.command.application.dto.ResponseMapDTO;
 import com.muze.domain.map.command.domain.aggregate.entity.Map;
 import com.muze.domain.map.command.domain.aggregate.vo.MemberVO;
@@ -38,10 +38,10 @@ public class CreateMapService {
 //
 //
 //    }
-    public ResponseMapDTO createMap(RequestMapDTO createMapDTO) {
-        MemberVO memberId = MemberVO.builder().memeberId(createMapDTO.getMemberId()).build();
+    public ResponseMapDTO createMap(CreateMapDTO createMapDTO, Long memberIdDTO) {
+        MemberVO memberId = MemberVO.builder().memeberId(memberIdDTO).build();
         Map newMap = mapRepository.save(new Map(memberId, createMapDTO.getTitle(),
-                createMapDTO.getSong(), createMapDTO.getSinger(), createMapDTO.getInfo(), createMapDTO.getData()));
+                createMapDTO.getSong(), createMapDTO.getSinger(), createMapDTO.getInfo(),createMapDTO.getData()));
         ResponseMapDTO map = new ResponseMapDTO(
                 newMap.getId(),
                 newMap.getMemberId().getId(),
@@ -54,7 +54,6 @@ public class CreateMapService {
         );
         return map;
     }
-
 }
 
 

@@ -4,27 +4,31 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.beans.ConstructorProperties;
+import lombok.Setter;
 
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Schema(description = "Map 요청 객체")
-public class RequestMapDTO {
-    private Long id;
-    private Long memberId;
+@Setter
+@Schema(description = "Map 생성 DTO")
+public class CreateMapDTO {
+
+    @Schema(description = "Media Art 제목", defaultValue = "도심의 빛")
     private String title;
+
+    @Schema(description = "Media Art 노래", defaultValue = "Think About' Chu")
     private String song;
+
+    @Schema(description = "Media Art 가수", defaultValue = "Sam kim")
     private String singer;
+
+    @Schema(description = "Media Art 설명", defaultValue = "이 미디어 아트는 도심의 빛을 어쩌구..~")
     private String info;
+
+    @Schema(description = "Media Art Map data", defaultValue = "{SpawnInfos=[{Location=(100.000000, 100.000000, 0.000000)}]}")
     private String data;
 
 
-    public RequestMapDTO(Long id) {
-        this.id = id;
-    }
 
 //    @ConstructorProperties({"title", "song", "memberId"})
 //    public RequestMapDTO(String title, String song, Long memberId) {
@@ -34,24 +38,18 @@ public class RequestMapDTO {
 //    }
 
 
-    public RequestMapDTO(Long memberId, String title, String song, String data) {
-        this.memberId = memberId;
+    public CreateMapDTO(String title, String song, String data) {
         this.title = title;
         this.song = song;
         this.data = data;
     }
 
-    public void setMemberId(Long memberId) {
-        this.memberId = memberId;
-    }
 
     @Override
     public String toString() {
         return "RequestMapDTO{" +
-                "id=" + id +
                 ", title='" + title + '\'' +
                 ", song='" + song + '\'' +
-                ", memberId=" + memberId +
                 '}';
     }
 }
