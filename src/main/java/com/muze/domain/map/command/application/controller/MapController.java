@@ -1,24 +1,25 @@
 package com.muze.domain.map.command.application.controller;
 
-import com.muze.domain.map.command.application.dto.RequestMapDTO;
+import com.muze.domain.map.command.application.dto.CreateMapDTO;
 import com.muze.domain.map.command.application.dto.ResponseMapDTO;
 import com.muze.domain.map.command.application.service.CreateMapService;
 import com.muze.domain.map.command.application.service.DeleteMapService;
 import com.muze.domain.map.command.application.service.UpdateMapService;
+import com.muze.global.security.principal.UserPrincipal;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.*;
-
+@Tag(name = "Map Command Controller")
 @RestController
 @RequestMapping("/map")
 public class MapController {
@@ -47,11 +48,18 @@ public class MapController {
 //    }
 
     @Operation(summary = "Map 등록", description = "사용자가 만든 Map 저장")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "201",
+                    description = "맵 데이터 저장 성공",
+                    content = @Content(
+                            schema = @Schema(implementation = ResponseMapDTO.class)))
+    })
     @PostMapping("/create")
-    public ResponseEntity<ResponseMapDTO> createMap(@RequestBody RequestMapDTO createDTO){
-        ResponseMapDTO map = createMapService.createMap(createDTO);
+    public ResponseEntity<ResponseMapDTO> createMap(@RequestBody CreateMapDTO createDTO
+                                                    ,@Parameter(hidden = true) @AuthenticationPrincipal UserPrincipal userPrincipal){
+        Long memberId = userPrincipal.getId();
+        ResponseMapDTO map = createMapService.createMap(createDTO, memberId);
         return new ResponseEntity<>(map, HttpStatus.CREATED);
     }
-
-
 }

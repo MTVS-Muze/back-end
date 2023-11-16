@@ -11,4 +11,6 @@ public interface MapMapper {
     List<FindMapDTO> findAll();
 
     FindMapDTO findById(Long id);
+
+    List<FindMapDTO> findByMemberId(Long memberId);
 }

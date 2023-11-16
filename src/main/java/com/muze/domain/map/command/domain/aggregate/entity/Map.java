@@ -27,6 +27,12 @@ public class Map {
     @Column
     private String song;
 
+    @Column
+    private String singer;
+
+    @Column
+    private String info;
+
     @Column(columnDefinition = "LONGTEXT")
     private String data;
 
@@ -34,10 +40,12 @@ public class Map {
     @Column(name = "created_date")
     private LocalDateTime createdDate;
 
-    public Map(MemberVO memberId, String title, String song, String data) {
+    public Map(MemberVO memberId, String title, String song, String singer, String info, String data) {
         this.memberId = memberId;
         this.title = title;
         this.song = song;
+        this.singer=singer;
+        this.info=info;
         this.data = data;
         this.createdDate=LocalDateTime.now();
 

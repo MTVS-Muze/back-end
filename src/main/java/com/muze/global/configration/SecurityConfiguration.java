@@ -82,7 +82,9 @@ public class SecurityConfiguration {
                                         "/api-docs", "/api-docs/**", "/v3/api-docs/**"
                                 )
                                 .antMatchers(
-                                        "/login/**","/auth/**","/map/**", "/like/**", "/friend/**", "/character/**"
+
+                                        "/login/**"
+
                                 )
                 )
                 .authorizeHttpRequests((authorize) -> authorize.anyRequest().permitAll());
@@ -110,10 +112,10 @@ public class SecurityConfiguration {
                 .and()
 
                 .authorizeRequests()
-                    .antMatchers("/**").permitAll() // 요청 url로 수정해야함
+                    .antMatchers("/test/**","/map/**","/member/**").permitAll() // 요청 url로 수정해야함
                     .antMatchers("/admin/**").hasRole(Role.ADMIN.name())
-//                .anyRequest()
-//                .authenticated()  어떤걸 의미하는지
+                .anyRequest()
+                .authenticated()  //어떤걸 의미하는지
                 .and()
 
                 .oauth2Login()
@@ -122,7 +124,8 @@ public class SecurityConfiguration {
                     .authorizationRequestRepository(httpCookieOAuth2AuthorizationRequestRepository())
                 .and()
                     .redirectionEndpoint()
-                        .baseUri("/oauth2/callback/*")
+                        // redirect uri로 인가 코드 전달 이후 토큰 서비스의 post요청 작동해 토큰 발급
+                        .baseUri("/oauth2/callback/kakao")
                 .and()
 
                 .userInfoEndpoint()
