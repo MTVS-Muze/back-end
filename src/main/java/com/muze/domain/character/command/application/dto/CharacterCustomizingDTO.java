@@ -1,5 +1,6 @@
 package com.muze.domain.character.command.application.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,6 +11,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class CharacterCustomizingDTO {
+    @Schema(hidden = true)
     private Long memberId;
     private Integer color;
     private Integer hat;

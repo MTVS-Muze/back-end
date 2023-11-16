@@ -6,6 +6,14 @@ import com.muze.domain.like.command.application.service.EnrollLikeService;
 import com.muze.domain.like.command.domain.repository.LikeRepository;
 import com.muze.domain.like.query.application.dto.LikeInfoDTO;
 import com.muze.domain.like.query.application.service.LikeInfoService;
+import com.muze.global.common.annotation.CurrentMember;
+import com.muze.global.security.principal.UserPrincipal;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,9 +41,22 @@ public class LikeController {
         this.likeRepository = likeRepository;
     }
 
+    @Operation(summary = "좋아요 등록", description = "좋아요를 등록하거나 취소함")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "친구 저장 성공",
+                    content = @Content(
+                            schema = @Schema())),
+            @ApiResponse(
+                    responseCode = "400",
+                    description = "필요한 값을 보내주지 않음",
+                    content = @Content(
+                            schema = @Schema())),
+    })
     @PostMapping
     public ResponseEntity<?> enrollOrDeleteLike(@Valid LikeDTO likeDTO, BindingResult bindingResult
-//                                             ,@AuthenticationPrincipal UserPrincipal userPrincipal
+                                             ,@Parameter(hidden = true) @CurrentMember UserPrincipal userPrincipal
     ){
         if(bindingResult.hasErrors()){
             List<FieldError> list = bindingResult.getFieldErrors();
@@ -43,6 +64,8 @@ public class LikeController {
                 return new ResponseEntity<>(error.getDefaultMessage() , HttpStatus.BAD_REQUEST);
             }
         }
+
+        likeDTO.setMemberId(userPrincipal.getId());
 
         if(likeInfoService.isLiked(likeDTO)){
             cancelLikeService.CancelLike(likeDTO);
