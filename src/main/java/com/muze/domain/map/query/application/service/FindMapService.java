@@ -30,12 +30,24 @@ public class FindMapService {
 
 
     public List<FindMapDTO> findAll(){
-        return mapMapper.findAll();
+        List<FindMapDTO> maps = mapMapper.findAll();
+        for (FindMapDTO map : maps) {
+            map.setMemberName(memberRequestService.findMemberById(Long.valueOf(map.getMemberName())).getName());
+        }
+        return maps;
     }
 
     public FindMapDTO findById(Long id){
         FindMapDTO map = mapMapper.findById(id);
-        map.setMemberId(memberRequestService.findMemberById(Long.valueOf(map.getMemberId())).getName());
+        map.setMemberName(memberRequestService.findMemberById(Long.valueOf(map.getMemberName())).getName());
         return map;
+    }
+
+    public List<FindMapDTO> findByMemberId(Long memberId){
+        List<FindMapDTO> maps = mapMapper.findByMemberId(memberId);
+        for (FindMapDTO map : maps){
+            map.setMemberName(memberRequestService.findMemberById(Long.valueOf(map.getMemberName())).getName());
+        }
+        return maps;
     }
 }

@@ -16,11 +16,5 @@ public class FindResponseDTO {
         this.file = file;
     }
 
-    @Override
-    public String toString() {
-        return "FindResponseDTO{" +
-                "text=" + text +
-                ", file=" + file +
-                '}';
-    }
+
 }
