@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.muze.domain.character.query.domain.repository.CharacterMapper">
+    <resultMap id="CharacterMap" type="com.muze.domain.character.query.application.dto.MyCharacterDTO">
+        <result property="color" column="color"/>
+        <result property="hat" column="hat"/>
+        <result property="face" column="face"/>
+    </resultMap>
+
+    <select id="findCharacterByMemberId" parameterType="HashMap" resultMap="CharacterMap" >
+        SELECT  color, hat, face
+        FROM
+            CHARACTER_TB
+        WHERE
+            member_id = #{memberId}
+    </select>
+
+
+
+</mapper>
