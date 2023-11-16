@@ -56,4 +56,15 @@ public class SwaggerConfiguration {
                 .pathsToMatch(paths)
                 .build();
     }
+
+    @Bean
+    public GroupedOpenApi character(){
+        String[] paths ={"/character/**"};
+
+        return GroupedOpenApi
+                .builder()
+                .group("Muze Sawgger v1-character")
+                .pathsToMatch(paths)
+                .build();
+    }
 }

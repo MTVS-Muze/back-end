@@ -3,6 +3,8 @@ package com.muze.domain.friend.query.application.controller;
 import com.muze.domain.friend.query.application.dto.FriendListsDTO;
 import com.muze.domain.friend.query.application.service.FindFriendsService;
 import com.muze.domain.member.query.application.dto.FindMemberDTO;
+import com.muze.global.common.annotation.CurrentMember;
+import com.muze.global.security.principal.UserPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -22,10 +24,10 @@ public class FriendQueryController {
     }
 
     @GetMapping
-    public ResponseEntity<?> findFriend(@RequestParam Long memberId){
+    public ResponseEntity<?> findFriend(@CurrentMember UserPrincipal userPrincipal){
 
         FriendListsDTO friendListsDTO = new FriendListsDTO(findFriendsService.findFriendsInfo(
-                findFriendsService.findFriends(memberId)));
+                findFriendsService.findFriends(userPrincipal.getId())));
 
         return ResponseEntity.ok(friendListsDTO);
     }
