@@ -82,6 +82,7 @@ public class SecurityConfiguration {
                                         "/api-docs", "/api-docs/**", "/v3/api-docs/**"
                                 )
                                 .antMatchers(
+
                                         "/login/**"
 
                                 )
