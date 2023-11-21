@@ -28,6 +28,7 @@ public class CharacterCustomizingService {
             currentCharacter.setHat(characterCustomizingDTO.getHat());
             currentCharacter.setColor(characterCustomizingDTO.getColor());
             currentCharacter.setFace(characterCustomizingDTO.getFace());
+            currentCharacter.setTie(characterCustomizingDTO.getTie());
 
             return currentCharacter.getId();
         }else{

@@ -16,6 +16,14 @@ public class CharacterCustomizingDTO {
     private Integer color;
     private Integer hat;
     private Integer face;
+    private Integer tie;
+
+    public CharacterCustomizingDTO(Integer color, Integer hat, Integer face, Integer tie) {
+        this.color = color;
+        this.hat = hat;
+        this.face = face;
+        this.tie = tie;
+    }
 
     public CharacterCustomizingDTO(Integer color, Integer hat, Integer face) {
         this.color = color;
