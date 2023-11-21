@@ -21,19 +21,19 @@ public class Map {
     @Embedded
     private MemberVO memberId;
 
-    @Column
+    @Column(nullable = false)
     private String title;
 
-    @Column
+    @Column(nullable = false)
     private String song;
 
-    @Column
+    @Column(nullable = false)
     private String singer;
 
     @Column
     private String info;
 
-    @Column(columnDefinition = "LONGTEXT")
+    @Column(columnDefinition = "LONGTEXT",nullable = false)
     private String data;
 
     @CreatedDate
