@@ -26,11 +26,26 @@ public class Character {
     @Column
     private Integer face;
 
+    @Column
+    private Integer tie;
+
     public Character(Long memberId, Integer color, Integer hat, Integer face) {
         this.memberId = new MemberVO(memberId);
         this.color = color;
         this.hat = hat;
         this.face = face;
+    }
+
+    public Character(Long memberId, Integer color, Integer hat, Integer face, Integer tie) {
+        this.memberId = new MemberVO(memberId);
+        this.color = color;
+        this.hat = hat;
+        this.face = face;
+        this.tie = tie;
+    }
+
+    public void setTie(Integer tie) {
+        this.tie = tie;
     }
 
     public void setColor(Integer color) {

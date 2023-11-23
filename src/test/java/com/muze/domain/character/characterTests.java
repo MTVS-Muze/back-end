@@ -34,7 +34,7 @@ public class characterTests {
         return Stream.of(
                 Arguments.of(
 
-                        new CharacterCustomizingDTO(1L,1,1,1)
+                        new CharacterCustomizingDTO(1L,1,1,1,1)
                 )
         );
 
@@ -43,8 +43,8 @@ public class characterTests {
     private static Stream<Arguments> updateCharacter() {
         return Stream.of(
                 Arguments.of(
-                        new CharacterCustomizingDTO(1L,1,1,1),
-                        new CharacterCustomizingDTO(1L,2,2,2)
+                        new CharacterCustomizingDTO(1L,1,1,1,1),
+                        new CharacterCustomizingDTO(1L,2,2,2,1)
                 )
         );
 

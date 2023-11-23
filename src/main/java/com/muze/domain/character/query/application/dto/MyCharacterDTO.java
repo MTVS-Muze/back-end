@@ -12,4 +12,6 @@ public class MyCharacterDTO {
     private Integer hat;
     private Integer color;
     private Integer face;
+
+    private Integer tie;
 }

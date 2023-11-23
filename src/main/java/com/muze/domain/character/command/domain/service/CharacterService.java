@@ -8,6 +8,6 @@ import org.springframework.stereotype.Service;
 public class CharacterService {
 
     public Character dtoToCharacterEntity(CharacterCustomizingDTO characterCustomizingDTO){
-        return new Character(characterCustomizingDTO.getMemberId(), characterCustomizingDTO.getColor(),characterCustomizingDTO.getHat(),characterCustomizingDTO.getFace());
+        return new Character(characterCustomizingDTO.getMemberId(), characterCustomizingDTO.getColor(),characterCustomizingDTO.getHat(),characterCustomizingDTO.getFace(), characterCustomizingDTO.getTie());
     }
 }

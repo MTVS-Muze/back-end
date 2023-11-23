@@ -6,10 +6,11 @@
         <result property="color" column="color"/>
         <result property="hat" column="hat"/>
         <result property="face" column="face"/>
+        <result property="tie" column="tie"/>
     </resultMap>
 
     <select id="findCharacterByMemberId" parameterType="HashMap" resultMap="CharacterMap" >
-        SELECT  color, hat, face
+        SELECT  color, hat, face, tie
         FROM
             CHARACTER_TB
         WHERE
